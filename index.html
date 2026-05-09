@@ -3,239 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impostor Software LLC</title>
-    <meta name="description" content="Impostor Software LLC builds thoughtful apps for music lovers. Home of SocialSound — your music companion across every platform.">
+    <title>Impostor Software · SocialSound — A music app with two sides</title>
+    <meta name="description" content="SocialSound is the iOS / iPadOS / tvOS / macOS music companion that splits in two: Pulse for artist news, releases, and concerts; Play for seven multiplayer music games with friends. Built by Impostor Software LLC.">
     <link rel="icon" type="image/png" href="/favicon.png">
+    <meta property="og:title" content="SocialSound — A music app with two sides">
+    <meta property="og:description" content="Pulse: news, releases, concerts for the artists in your library. Play: seven music games with friends. Stream from your phone, host on Apple TV / iPad / Mac.">
+    <meta property="og:image" content="/socialsound-icon.png">
+    <meta property="og:type" content="website">
     <style>
         :root {
-            --brand-primary: #7333E6;
-            --brand-secondary: #FF8C00;
-            --brand-tertiary: #664D8C;
-            --bg-dark: #33144F;
-            --bg-darker: #1A0A26;
+            /* App-side accent colors lifted from
+               Shared/Theme/AppTheme.swift so the marketing site
+               and the app share a vocabulary. */
+            --pulse-accent: #8050E0;        /* Pulse purple */
+            --pulse-accent-soft: rgba(128, 80, 224, 0.14);
+            --play-accent: #E07B2B;          /* Play orange */
+            --play-accent-soft: rgba(224, 123, 43, 0.14);
+            --bg-deep: #0c060f;
+            --bg-mid: #1a0f24;
+            --panel: rgba(255, 255, 255, 0.04);
+            --panel-border: rgba(255, 255, 255, 0.10);
             --text-primary: #FFFFFF;
-            --text-secondary: rgba(255, 255, 255, 0.65);
-            --text-tertiary: rgba(255, 255, 255, 0.35);
+            --text-secondary: rgba(255, 255, 255, 0.72);
+            --text-tertiary: rgba(255, 255, 255, 0.45);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-darker);
+            background: var(--bg-deep);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Hero */
+        a { color: var(--pulse-accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ── Hero ──────────────────────────────────────────── */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: relative;
+            padding: 4rem 2rem 5rem;
             text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 50%, var(--brand-tertiary) 100%);
-            position: relative;
+            background:
+                radial-gradient(circle at 22% 30%, rgba(128, 80, 224, 0.22) 0%, transparent 55%),
+                radial-gradient(circle at 78% 50%, rgba(224, 123, 43, 0.16) 0%, transparent 55%),
+                linear-gradient(180deg, var(--bg-mid) 0%, var(--bg-deep) 100%);
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at 30% 40%, rgba(115, 51, 230, 0.15) 0%, transparent 60%),
-                        radial-gradient(circle at 70% 60%, rgba(255, 140, 0, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .logo-container {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .logo-container {
-            margin-bottom: -10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .company-logo {
-            width: 300px;
-            height: auto;
-        }
-
-        .company-name {
-            font-size: 2.5rem;
+        .hero-eyebrow {
+            display: inline-block;
+            font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.25rem;
-        }
-
-        .company-tagline {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text-tertiary);
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 2.5rem;
-        }
-
-        .hero-description {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            line-height: 1.6;
-            margin-bottom: 3rem;
-        }
-
-        /* App section */
-        .app-card {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 480px;
-            width: 100%;
-            text-align: left;
-            backdrop-filter: blur(20px);
-            position: relative;
-            z-index: 1;
-        }
-
-        .app-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--brand-secondary);
-            background: rgba(255, 140, 0, 0.12);
-            padding: 4px 12px;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .app-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .app-subtitle {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
             margin-bottom: 1.5rem;
         }
 
-        .feature-list {
-            list-style: none;
-            margin-bottom: 2rem;
+        .hero-icon {
+            width: 96px;
+            height: 96px;
+            border-radius: 22px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 16px 40px -10px rgba(128, 80, 224, 0.45);
         }
 
-        .feature-list li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 0;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .feature-list li::before {
-            content: '✓';
-            color: var(--brand-primary);
-            font-weight: 700;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .app-store-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--brand-primary);
-            color: white;
-            text-decoration: none;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .app-store-btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        .app-store-btn.coming-soon {
-            background: rgba(255, 255, 255, 0.1);
-            cursor: default;
-        }
-
-        .app-store-btn.coming-soon:hover {
-            transform: none;
-            opacity: 1;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-tertiary);
-            font-size: 0.8rem;
-        }
-
-        .footer a {
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: var(--text-primary);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.05;
             margin-bottom: 1rem;
-        }
-
-        /* Screenshots section */
-        .screenshots {
-            padding: 5rem 2rem 6rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(115, 51, 230, 0.05) 100%);
-            text-align: center;
-        }
-
-        .screenshots-heading {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .screenshots-sub {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 560px;
+            max-width: 760px;
             margin-left: auto;
             margin-right: auto;
         }
 
+        .hero-title .accent-pulse { color: var(--pulse-accent); }
+        .hero-title .accent-play { color: var(--play-accent); }
+
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-cta-row {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 26px;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+            color: white;
+        }
+
+        .btn:hover { transform: translateY(-2px); text-decoration: none; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--pulse-accent) 0%, #9966ff 100%);
+            box-shadow: 0 10px 24px -8px rgba(128, 80, 224, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--panel-border);
+        }
+
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.13); }
+
+        /* ── Section shell ─────────────────────────────────── */
+        section.block {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .block-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .block-sub {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        /* ── Two-sides split ───────────────────────────────── */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .side-card {
+            border-radius: 22px;
+            padding: 2.25rem;
+            border: 1px solid var(--panel-border);
+            background: var(--panel);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .side-card.pulse {
+            background:
+                radial-gradient(circle at 18% 22%, var(--pulse-accent-soft) 0%, transparent 60%),
+                var(--panel);
+            border-color: rgba(128, 80, 224, 0.30);
+        }
+
+        .side-card.play {
+            background:
+                radial-gradient(circle at 80% 18%, var(--play-accent-soft) 0%, transparent 60%),
+                var(--panel);
+            border-color: rgba(224, 123, 43, 0.30);
+        }
+
+        .side-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 100px;
+            margin-bottom: 1rem;
+        }
+
+        .side-card.pulse .side-tag {
+            color: #c2a3ff;
+            background: rgba(128, 80, 224, 0.18);
+        }
+
+        .side-card.play .side-tag {
+            color: #ffb677;
+            background: rgba(224, 123, 43, 0.18);
+        }
+
+        .side-card h3 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .side-card p.lede {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .side-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .side-features li {
+            display: flex;
+            gap: 10px;
+            font-size: 0.93rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .side-features li::before {
+            content: '◆';
+            font-size: 0.7rem;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .side-card.pulse .side-features li::before { color: var(--pulse-accent); }
+        .side-card.play  .side-features li::before { color: var(--play-accent); }
+
+        /* ── Games grid ────────────────────────────────────── */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .game-card {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 1.4rem;
+        }
+
+        .game-card .glyph {
+            font-size: 1.5rem;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        .game-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        .game-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ── Hosts strip ───────────────────────────────────── */
+        .hosts-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        .host-tile {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .host-tile .glyph {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .host-tile h5 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .host-tile p {
+            font-size: 0.78rem;
+            color: var(--text-tertiary);
+            line-height: 1.45;
+        }
+
+        /* ── Screenshots row ───────────────────────────────── */
         .screenshots-row {
             display: flex;
             justify-content: center;
@@ -246,8 +316,6 @@
             margin: 0 auto;
         }
 
-        /* CSS-drawn iPhone frame — purely cosmetic rounded-bezel look.
-           Uses conic gradient for subtle metallic rim, inset shadow for depth. */
         .phone-frame {
             position: relative;
             width: 240px;
@@ -255,15 +323,13 @@
             border-radius: 42px;
             background: linear-gradient(135deg, #1c1c1e 0%, #2c2c2e 50%, #1c1c1e 100%);
             box-shadow:
-                0 0 0 1px rgba(255,255,255,0.08),
-                0 30px 60px -15px rgba(0,0,0,0.5),
-                0 10px 20px -10px rgba(115,51,230,0.25);
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                0 30px 60px -15px rgba(0, 0, 0, 0.5),
+                0 10px 20px -10px rgba(128, 80, 224, 0.25);
             transition: transform 0.3s ease;
         }
 
-        .phone-frame:hover {
-            transform: translateY(-6px);
-        }
+        .phone-frame:hover { transform: translateY(-6px); }
 
         .phone-frame img {
             display: block;
@@ -272,7 +338,6 @@
             border-radius: 32px;
         }
 
-        /* Notch — a thin rounded pill floating above the screen top. */
         .phone-frame::before {
             content: '';
             position: absolute;
@@ -290,15 +355,129 @@
             margin-top: 14px;
             font-size: 0.8rem;
             color: var(--text-tertiary);
+            text-align: center;
             letter-spacing: 0.5px;
         }
 
-        /* Responsive */
-        @media (max-width: 600px) {
-            .company-name { font-size: 1.8rem; }
-            .app-card { padding: 1.5rem; margin: 0 1rem; }
-            .app-name { font-size: 1.4rem; }
-            .screenshots { padding: 3rem 1rem 4rem; }
+        /* ── Pricing ───────────────────────────────────────── */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: var(--panel);
+            border: 1px solid var(--panel-border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            text-align: left;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--pulse-accent);
+            background:
+                radial-gradient(circle at 80% 0%, var(--pulse-accent-soft) 0%, transparent 60%),
+                var(--panel);
+        }
+
+        .pricing-tier {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 0.4rem;
+        }
+
+        .pricing-card h4 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        .pricing-price {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin: 0.4rem 0 1rem;
+        }
+
+        .pricing-price strong {
+            color: var(--text-primary);
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-right: 4px;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pricing-card li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 10px;
+        }
+
+        .pricing-card li::before {
+            content: '✓';
+            color: var(--pulse-accent);
+            font-weight: 800;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .pricing-note {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--text-tertiary);
+        }
+
+        /* ── Footer ────────────────────────────────────────── */
+        footer.site-footer {
+            border-top: 1px solid var(--panel-border);
+            padding: 3rem 2rem 2rem;
+            margin-top: 4rem;
+            text-align: center;
+            background: var(--bg-deep);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+        }
+
+        .footer-meta {
+            color: var(--text-tertiary);
+            font-size: 0.78rem;
+        }
+
+        .footer-meta p { margin: 4px 0; }
+
+        /* ── Responsive ────────────────────────────────────── */
+        @media (max-width: 760px) {
+            .hero-title { font-size: 2.4rem; }
+            .hero-sub { font-size: 1.05rem; }
+            .split { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .hosts-strip { grid-template-columns: repeat(2, 1fr); }
+            section.block { padding: 3.5rem 1.25rem; }
+            .block-title { font-size: 1.7rem; }
             .phone-frame { width: 200px; padding: 8px; border-radius: 34px; }
             .phone-frame img { border-radius: 26px; }
             .phone-frame::before { top: 18px; width: 75px; height: 20px; }
@@ -306,78 +485,231 @@
     </style>
 </head>
 <body>
+
+    <!-- ── HERO ───────────────────────────────────────────── -->
     <section class="hero">
-        <div class="logo-container">
-            <img src="/logo.png" alt="Impostor Software logo" class="company-logo">
-        </div>
-
-        <h1 class="company-name">Impostor Software</h1>
-        <p class="company-tagline">Thoughtful Apps for Music Lovers</p>
-        <p class="hero-description">
-            We build tools that bring you closer to the music you love — across every platform, every artist, every moment.
+        <p class="hero-eyebrow">By Impostor Software LLC</p>
+        <img src="/socialsound-icon.png" alt="SocialSound app icon" class="hero-icon">
+        <h1 class="hero-title">
+            A music app with
+            <span class="accent-pulse">two&nbsp;sides</span>.
+            One for <span class="accent-pulse">discovery</span>,
+            one for <span class="accent-play">play</span>.
+        </h1>
+        <p class="hero-sub">
+            SocialSound is the iOS / iPadOS / tvOS / macOS companion to your music library.
+            News, concerts, and setlists for the artists you follow — plus seven
+            multiplayer games for the next time you're with friends.
         </p>
-
-        <div class="app-card">
-            <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px;">
-                <img src="/socialsound-icon.png" alt="SocialSound" style="width:56px;height:56px;border-radius:14px;">
-                <div>
-                    <div class="app-badge">Now in Development</div>
-                    <h2 class="app-name" style="margin-bottom:0">SocialSound</h2>
-                </div>
-            </div>
-            <p class="app-subtitle">
-                Your music. Every platform. One app for artist news, concerts, setlists, new releases, and cross-platform link sharing.
-            </p>
-            <ul class="feature-list">
-                <li>Artist news from 20+ music publications</li>
-                <li>Upcoming concerts with location filtering</li>
-                <li>New release tracking with calendar reminders</li>
-                <li>Cross-platform sharing (Apple Music, Spotify, YouTube, and more)</li>
-                <li>Music trivia and games</li>
-                <li>Smart sharing to contacts with their preferred service</li>
-            </ul>
-            <a href="#" class="app-store-btn coming-soon">
-                Coming Soon to the App Store
+        <div class="hero-cta-row">
+            <a class="btn btn-primary" href="https://testflight.apple.com/join/RM1YJjc6" rel="noopener" target="_blank">
+                Join the TestFlight beta
+            </a>
+            <a class="btn btn-secondary" href="#two-sides">
+                See what's inside
             </a>
         </div>
     </section>
 
-    <section class="screenshots">
-        <h2 class="screenshots-heading">A look inside SocialSound</h2>
-        <p class="screenshots-sub">
-            One feed for every artist you follow, deep pages with bios and upcoming shows,
-            and cross-platform sharing built in.
+    <!-- ── TWO SIDES ──────────────────────────────────────── -->
+    <section class="block" id="two-sides">
+        <h2 class="block-title">One app, two sides</h2>
+        <p class="block-sub">
+            On first launch, you pick a side. Switch any time from Settings. Each side has its own theme, its own tabs, its own use case.
+        </p>
+
+        <div class="split">
+            <div class="side-card pulse">
+                <span class="side-tag">Pulse · Discovery</span>
+                <h3>News, releases, shows.</h3>
+                <p class="lede">
+                    A library-aware companion: every artist in your Apple Music or Spotify library, organized into one feed of what they're doing right now.
+                </p>
+                <ul class="side-features">
+                    <li>Daily artist news from 20+ music publications</li>
+                    <li>Upcoming concerts filtered by your location</li>
+                    <li>New release tracking with calendar reminders</li>
+                    <li>Recent setlists from artists on tour</li>
+                    <li>Cross-platform link sharing — convert any music link to Apple, Spotify, or YouTube Music in one tap</li>
+                </ul>
+            </div>
+
+            <div class="side-card play">
+                <span class="side-tag">Play · Party games</span>
+                <h3>Music night, anywhere.</h3>
+                <p class="lede">
+                    Seven multiplayer music games for road trips, holiday gatherings, the bar, the line at Disney. Host on a TV, on your iPad, on a Mac — or pass-and-play on a single phone.
+                </p>
+                <ul class="side-features">
+                    <li>Music Bingo · Album Cover Reveal · Mystery DJ</li>
+                    <li>Name That TV Theme · Music Video Guessing</li>
+                    <li>Team Music Quiz · Mixtape Trivia</li>
+                    <li>Per-game leaderboards across every session</li>
+                    <li>30-day rolling Mixtape — every song from every game you played, ready to add to your library</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── GAMES GRID ────────────────────────────────────── -->
+    <section class="block" style="background: rgba(255,255,255,0.02);">
+        <h2 class="block-title">Seven games. One stack.</h2>
+        <p class="block-sub">
+            Every game uses the same connect-and-play infrastructure. Connect once, switch games whenever the room calls for something different.
+        </p>
+
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="glyph">▦</div>
+                <h4>Music Bingo</h4>
+                <p>5×5 cards, 30-second clips, first to five-in-a-row wins. Pick a theme; the host plays the soundtrack.</p>
+            </div>
+            <div class="game-card">
+                <div class="glyph">◐</div>
+                <h4>Album Cover Reveal</h4>
+                <p>Cover slowly comes into focus on the host's screen. Easy: pick from 4 chips. Hard: type the title. Speed bonus.</p>
+            </div>
+            <div class="game-card">
+                <div class="glyph">♪</div>
+                <h4>Mystery DJ</h4>
+                <p>Each round, one player's library secretly DJs. Guess whose track is playing — and how well you actually know your friends.</p>
+            </div>
+            <div class="game-card">
+                <div class="glyph">📺</div>
+                <h4>Name That TV Theme</h4>
+                <p>30-second clip from a famous TV intro. Pick the show from the chips. Sitcoms, crime dramas, decades — your choice.</p>
+            </div>
+            <div class="game-card">
+                <div class="glyph">▶</div>
+                <h4>Music Video Guessing</h4>
+                <p>Host plays a music video. Easy / medium-muted / hard-with-three-strikes. First correct chip wins the round.</p>
+            </div>
+            <div class="game-card">
+                <div class="glyph">⚐</div>
+                <h4>Team Music Quiz</h4>
+                <p>Buzz in on your phone, scoreboard on the TV. Four round types: Name the Song, Finish the Lyric, Decade Decoder, Name the Artist.</p>
+            </div>
+            <div class="game-card">
+                <div class="glyph">♫</div>
+                <h4>Mixtape Trivia</h4>
+                <p>Each player submits 3 artists. Random album cover + 30 seconds of a track. Guess the artist (1pt), album (2pt), and song (3pt).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── HOSTS ─────────────────────────────────────────── -->
+    <section class="block">
+        <h2 class="block-title">Play anywhere. Host anywhere.</h2>
+        <p class="block-sub">
+            Phones connect to whichever device you have on hand. The host shows the canvas; phones become controllers.
+        </p>
+
+        <div class="hosts-strip">
+            <div class="host-tile">
+                <div class="glyph">📺</div>
+                <h5>Apple TV</h5>
+                <p>Best for parties — big screen, room-filling sound</p>
+            </div>
+            <div class="host-tile">
+                <div class="glyph">⊟</div>
+                <h5>iPad</h5>
+                <p>Backyard or kitchen counter; landscape or portrait</p>
+            </div>
+            <div class="host-tile">
+                <div class="glyph">▭</div>
+                <h5>Mac</h5>
+                <p>Native Mac app; great for office / co-working hangouts</p>
+            </div>
+            <div class="host-tile">
+                <div class="glyph">▢</div>
+                <h5>iPhone</h5>
+                <p>No TV around? Host on a phone over Bluetooth or peer-to-peer Wi-Fi — no router needed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SCREENSHOTS ───────────────────────────────────── -->
+    <section class="block" style="background: rgba(255,255,255,0.02);">
+        <h2 class="block-title">A peek inside</h2>
+        <p class="block-sub">
+            Beta builds shown — visuals evolve as we ship. Join the TestFlight to see the latest.
         </p>
 
         <div class="screenshots-row">
             <div>
                 <div class="phone-frame">
-                    <img src="/screenshots/Feed.jpg" alt="SocialSound news feed" loading="lazy">
+                    <img src="/screenshots/Feed.jpg" alt="SocialSound news feed showing artist updates" loading="lazy">
                 </div>
-                <p class="phone-caption">News Feed</p>
+                <p class="phone-caption">Pulse — News Feed</p>
             </div>
             <div>
                 <div class="phone-frame">
-                    <img src="/screenshots/ArtistDetail.jpg" alt="SocialSound artist detail view" loading="lazy">
+                    <img src="/screenshots/ArtistDetail.jpg" alt="Artist detail view with shows + releases" loading="lazy">
                 </div>
-                <p class="phone-caption">Artist Detail</p>
+                <p class="phone-caption">Pulse — Artist Detail</p>
             </div>
             <div>
                 <div class="phone-frame">
-                    <img src="/screenshots/Artists.jpg" alt="SocialSound artist library" loading="lazy">
+                    <img src="/screenshots/Artists.jpg" alt="Library of followed artists" loading="lazy">
                 </div>
-                <p class="phone-caption">Your Library</p>
+                <p class="phone-caption">Pulse — Your Library</p>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="mailto:contact@impostorsoftware.com">Contact</a>
-            <a href="/privacy">Privacy Policy</a>
+    <!-- ── PRICING ───────────────────────────────────────── -->
+    <section class="block">
+        <h2 class="block-title">Free to play.</h2>
+        <p class="block-sub">
+            All seven games + the discovery feed work on the free tier. Plus removes ads, lifts caps, and unlocks loyalty rewards through Mixtape Tokens.
+        </p>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <p class="pricing-tier">Free</p>
+                <h4>SocialSound</h4>
+                <p class="pricing-price"><strong>$0</strong> with optional ads</p>
+                <ul>
+                    <li>All 7 games — solo and multi-player</li>
+                    <li>Up to 5 followed artists in Pulse</li>
+                    <li>30-day rolling mixtape from your sessions</li>
+                    <li>1 saved recipient for cross-service shares</li>
+                    <li>No ads inside live game sessions</li>
+                </ul>
+            </div>
+
+            <div class="pricing-card featured">
+                <p class="pricing-tier">Plus · launch tier</p>
+                <h4>SocialSound Plus</h4>
+                <p class="pricing-price"><strong>$2.99</strong>/month or $19.99/year</p>
+                <ul>
+                    <li>No ads anywhere</li>
+                    <li>Unlimited followed artists</li>
+                    <li>Forever mixtape — no rolling cap</li>
+                    <li>Concert push alerts for your library</li>
+                    <li>iCloud sync across devices</li>
+                    <li>Earn Mixtape Tokens to unlock free Plus months and gift days to friends</li>
+                </ul>
+            </div>
         </div>
-        <p>&copy; 2026 Impostor Software LLC. All rights reserved.</p>
-        <p style="margin-top: 4px;">Cooper City, Florida</p>
+
+        <p class="pricing-note">Pricing in development. Final tiers and intro pricing announced before App Store launch.</p>
+    </section>
+
+    <!-- ── FOOTER ────────────────────────────────────────── -->
+    <footer class="site-footer">
+        <div class="footer-links">
+            <a href="https://testflight.apple.com/join/RM1YJjc6" rel="noopener" target="_blank">Join the beta</a>
+            <a href="mailto:contact@impostorsoftware.com">Contact</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/terms">Terms</a>
+            <a href="/affiliate-disclosure">Affiliate Disclosure</a>
+        </div>
+        <div class="footer-meta">
+            <p>Built by Impostor Software LLC · Cooper City, Florida</p>
+            <p>&copy; 2026 Impostor Software LLC. All rights reserved.</p>
+        </div>
     </footer>
+
 </body>
 </html>
