@@ -368,6 +368,15 @@
             margin: 0 auto;
         }
 
+        /* Three-tier variant. The Pro tier is the featured
+           card; we still want it to read clearly even when
+           three sit side-by-side. Cap width higher than the
+           two-tier grid so each card has breathing room. */
+        .pricing-grid-three {
+            grid-template-columns: 1fr 1fr 1fr;
+            max-width: 1100px;
+        }
+
         .pricing-card {
             background: var(--panel);
             border: 1px solid var(--panel-border);
@@ -474,7 +483,8 @@
             .hero-title { font-size: 2.4rem; }
             .hero-sub { font-size: 1.05rem; }
             .split { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-grid,
+            .pricing-grid-three { grid-template-columns: 1fr; }
             .hosts-strip { grid-template-columns: repeat(2, 1fr); }
             section.block { padding: 3.5rem 1.25rem; }
             .block-title { font-size: 1.7rem; }
@@ -659,18 +669,19 @@
 
     <!-- ── PRICING ───────────────────────────────────────── -->
     <section class="block">
-        <h2 class="block-title">Free to play.</h2>
+        <h2 class="block-title">Free to play. Pro for remote.</h2>
         <p class="block-sub">
-            All seven games + the discovery feed work on the free tier. Plus removes ads, lifts caps, and unlocks loyalty rewards through Mixtape Tokens.
+            All seven games + the discovery feed work on the free tier with local play.
+            Plus removes ads and lifts caps. Pro unlocks remote multiplayer with friends anywhere.
         </p>
 
-        <div class="pricing-grid">
+        <div class="pricing-grid pricing-grid-three">
             <div class="pricing-card">
                 <p class="pricing-tier">Free</p>
                 <h4>SocialSound</h4>
                 <p class="pricing-price"><strong>$0</strong> with optional ads</p>
                 <ul>
-                    <li>All 7 games — solo and multi-player</li>
+                    <li>All 7 games — local multiplayer (peer-to-peer)</li>
                     <li>Up to 5 followed artists in Pulse</li>
                     <li>30-day rolling mixtape from your sessions</li>
                     <li>1 saved recipient for cross-service shares</li>
@@ -678,8 +689,8 @@
                 </ul>
             </div>
 
-            <div class="pricing-card featured">
-                <p class="pricing-tier">Plus · launch tier</p>
+            <div class="pricing-card">
+                <p class="pricing-tier">Plus</p>
                 <h4>SocialSound Plus</h4>
                 <p class="pricing-price"><strong>$2.99</strong>/month or $19.99/year</p>
                 <ul>
@@ -688,12 +699,26 @@
                     <li>Forever mixtape — no rolling cap</li>
                     <li>Concert push alerts for your library</li>
                     <li>iCloud sync across devices</li>
-                    <li>Earn Mixtape Tokens to unlock free Plus months and gift days to friends</li>
+                    <li>Earn Mixtape Tokens for free months + gift days</li>
+                </ul>
+            </div>
+
+            <div class="pricing-card featured">
+                <p class="pricing-tier">Pro · with remote play</p>
+                <h4>SocialSound Pro</h4>
+                <p class="pricing-price"><strong>$5.99</strong>/month or $44.99/year</p>
+                <ul>
+                    <li><strong>Remote multiplayer.</strong> Play any game with friends across the country</li>
+                    <li><strong>Up to 4 free joiners</strong> per remote session — they don't need their own subscription</li>
+                    <li>Custom game themes from your playlists</li>
+                    <li>Session log export</li>
+                    <li>Early access to new games + bundles</li>
+                    <li>Everything in Plus</li>
                 </ul>
             </div>
         </div>
 
-        <p class="pricing-note">Pricing in development. Final tiers and intro pricing announced before App Store launch.</p>
+        <p class="pricing-note">Pricing in development. Final tiers and intro pricing announced before App Store launch. Local play stays free forever.</p>
     </section>
 
     <!-- ── FOOTER ────────────────────────────────────────── -->
